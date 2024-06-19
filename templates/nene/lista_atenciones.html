@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+{% block content %}
+<div>
+    <a href="/personas" class="btn btn-danger">VOLVER</a>
+    <h2 class="text-white">Lista de Atenciones</h2>
+    <table class="table text-white">
+        <thead>
+            <tr>
+                <th>ID Persona</th>
+                <th>ID Servidor</th>
+                <th>Calificación</th>
+                <th>Fecha</th>
+                <th>Tiempo Tomado (segundos)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for att in atenciones %}
+            <tr>
+                <td>{{ att.person_id }}</td>
+                <td>{{ att.server_id }}</td>
+                <td>{{ att.rating }}</td>
+                <td>{{ att.date }}</td>
+                <td>{{ att.time_taken }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

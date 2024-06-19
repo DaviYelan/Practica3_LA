@@ -1,0 +1,105 @@
+{% extends "template.html" %}
+{% block content %}
+<h2 class="text-white">Lista de personas</h2>
+<div class="booking-form-body">
+    <a href="/personas/ver" class="btn btn-danger">AGREGAR</a>
+    <a href="/atenciones/lista" class="btn btn-secondary">Ver Lista de Atenciones</a>
+    
+    <!-- Formulario para seleccionar método de ordenación, atributo y orden -->
+    <form method="GET" action="/personas/ordenar">
+        <div class="form-group">
+            <label for="sortMethod" class="text-white">Método de ordenación</label>
+            <select id="sortMethod" name="sortMethod" class="form-control">
+                <option value="merge">MergeSort</option>
+                <option value="quick">QuickSort</option>
+                <option value="shell">ShellSort</option>
+                <option value="insercion">Inserción</option>
+                <option value="burbuja">Burbuja</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sortAttribute" class="text-white">Atributo de ordenación</label>
+            <select id="sortAttribute" name="sortAttribute" class="form-control">
+                <option value="_apellidos">Apellidos</option>
+                <option value="_nombres">Nombres</option>
+                <option value="_dni">DNI</option>
+                <option value="_telefono">Teléfono</option>
+                <option value="_direccion">Dirección</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="text-white">Orden</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sortOrder" id="asc" value="asc" checked>
+                <label class="form-check-label text-white" for="asc">Ascendente</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sortOrder" id="desc" value="desc">
+                <label class="form-check-label text-white" for="desc">Descendente</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Ordenar</button>
+    </form>
+
+    <!-- Formulario para buscar personas -->
+    <form method="GET" action="/personas/buscar">
+        <div class="form-group">
+            <label for="searchMethod" class="text-white">Método de búsqueda</label>
+            <select id="searchMethod" name="metodo_busqueda" class="form-control">
+                <option value="lineal">Búsqueda Lineal</option>
+                <option value="binario">Búsqueda Binaria</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="searchAttribute" class="text-white">Atributo de búsqueda</label>
+            <select id="searchAttribute" name="searchAttribute" class="form-control">
+                <option value="_apellidos">Apellidos</option>
+                <option value="_nombres">Nombres</option>
+                <option value="_dni">DNI</option>
+                <option value="_telefono">Teléfono</option>
+                <option value="_direccion">Dirección</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="searchValue" class="text-white">Valor de búsqueda</label>
+            <input type="text" id="searchValue" name="query" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label class="text-white">Tipo de coincidencia</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="startsWith" id="anywhere" value="false" checked>
+                <label class="form-check-label text-white" for="anywhere">En donde sea</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="startsWith" id="start" value="true">
+                <label class="form-check-label text-white" for="start">Al principio</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <table id="tabla" class="table text-white">
+        <thead>
+            <th>Nro</th>
+            <th>DNI</th>
+            <th>Boys</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for item in lista %}
+            <tr>
+                <td>{{ item._id }}</td>
+                <td>{{ item._dni }}</td>
+                <td>{{ item._apellidos }} {{ item._nombres }}</td>
+                <td>{{ item._telefono }}</td>
+                <td>{{ item._direccion }}</td>
+                <td><a href="/personas/editar/{{ item._id }}" class="btn btn-info">Modificar</a></td>
+                <td><a href="/atenciones/registrar/{{ item._id }}" class="btn btn-success">Registrar Atención</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

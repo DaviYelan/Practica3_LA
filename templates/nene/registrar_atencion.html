@@ -1,0 +1,32 @@
+{% extends "template.html" %}
+{% block content %}
+<div>
+    <a href="/personas" class="btn btn-danger">VOLVER</a>
+    <h2 class="text-white">Registrar Atención</h2>
+    <form action="/atenciones/registrar/{{ person_id }}" method="post">
+        <div class="form-group">
+            <label for="server_id" class="text-white">Servidor</label>
+            <select name="server_id" id="server_id" class="form-control">
+                <option value="1">Servidor 1</option>
+                <option value="2">Servidor 2</option>
+                <option value="3">Servidor 3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rating" class="text-white">Calificación</label>
+            <select name="rating" id="rating" class="form-control">
+                <option value="malo">Mala</option>
+                <option value="regular">Regular</option>
+                <option value="bueno">Buena</option>
+                <option value="muy_bueno">Muy Buena</option>
+                <option value="excelente">Excelente</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="time_taken" class="text-white">Tiempo Tomado (segundos)</label>
+            <input type="number" name="time_taken" id="time_taken" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Atención</button>
+    </form>
+</div>
+{% endblock %}
